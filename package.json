@@ -1,0 +1,13 @@
+{
+    "name": "selfish",
+    "version": "0.0.20241026",
+    "scripts": {
+        "lint": "eslint --fix *.*js",
+        "prettier": "prettier --write *.*js *.json .prettierrc"
+    },
+    "author": "Makoto Mizukami <comm@makotom.org>",
+    "dependencies": {
+        "eslint": "^9.13.0",
+        "prettier": "^3.3.3"
+    }
+}

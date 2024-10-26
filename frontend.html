@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selfish</title>
+
+<form id="run">
+  <dl>
+    <dt>Email
+    <dd><input id="email" type="text" size="40" placeholder="yourname@example.com">
+
+    <dt>Valid for (by second, as multiplication of 2 integers)
+    <dd><input id="valid-for-coefficient" type="text" size="10" value="365" placeholder="365"> * <input id="valid-for-base" type="text" size="10" value="86400" placeholder="86400">
+
+    <dt>Password for PKCS12
+    <dd><input id="password" type="password" size="40" placeholder="Strong password for your key!">
+  </dl>
+
+  <button type="submit">Run</button>
+</form>
+
+<div id="responses"></div>
