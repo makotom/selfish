@@ -18,10 +18,11 @@
         const validForBaseInput = document.querySelector('input#valid-for-base');
         const passwordInput = document.querySelector('input#password');
 
-        const runForm = document.querySelector('form#run');
+        const paramsForm = document.querySelector('form#params');
+        const runButton = document.querySelector('button#run');
         const responsesDiv = document.querySelector('div#responses');
 
-        runForm.addEventListener('submit', async (evt) => {
+        const runEventHandler = async (evt) => {
             try {
                 const email = emailInput.value;
                 const validFor = parseInt(validForCoefficientInput.value, 10) * parseInt(validForBaseInput.value, 10);
@@ -51,10 +52,15 @@
             } catch (err) {
                 console.log(err);
             } finally {
+                paramsForm.reset();
+                evt.preventDefault();
+
                 wasmInst = await WebAssembly.instantiate(wasmMod, go.importObject);
                 go.run(wasmInst).catch((err) => console.error(err));
-                evt.preventDefault();
             }
-        });
+        };
+
+        paramsForm.addEventListener('submit', runEventHandler);
+        runButton.addEventListener('click', runEventHandler);
     });
 }
