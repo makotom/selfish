@@ -20,7 +20,8 @@
 
         const paramsForm = document.querySelector('form#params');
         const runButton = document.querySelector('button#run');
-        const responsesDiv = document.querySelector('div#responses');
+
+        const certsOl = document.createElement('ol');
 
         const runEventHandler = async (evt) => {
             try {
@@ -28,7 +29,10 @@
                 const validFor = parseInt(validForCoefficientInput.value, 10) * parseInt(validForBaseInput.value, 10);
                 const password = passwordInput.value;
 
+                const resLi = document.createElement('li');
                 const resContainerDiv = document.createElement('div');
+                const liLabelP = document.createElement('p');
+                const liLabelB = document.createElement('b');
                 const resListUl = document.createElement('ul');
                 const keyLi = document.createElement('li');
                 const keyAnchor = document.createElement('a');
@@ -36,6 +40,10 @@
                 const certAnchor = document.createElement('a');
 
                 const generated = generateSelfSignedPersonalCertificate(email, validFor, password);
+
+                liLabelB.appendChild(document.createTextNode(email));
+                liLabelP.appendChild(liLabelB);
+                resContainerDiv.appendChild(liLabelP);
 
                 keyAnchor.appendChild(document.createTextNode('Private key PKCS12'));
                 keyAnchor.href = `data:application/x-pkcs12;base64,${generated.key}`;
@@ -48,7 +56,8 @@
                 resListUl.appendChild(certLi);
 
                 resContainerDiv.appendChild(resListUl);
-                responsesDiv.appendChild(resContainerDiv);
+                resLi.appendChild(resContainerDiv);
+                certsOl.appendChild(resLi);
             } catch (err) {
                 console.log(err);
             } finally {
@@ -60,6 +69,7 @@
             }
         };
 
+        paramsForm.parentNode.appendChild(certsOl);
         paramsForm.addEventListener('submit', runEventHandler);
         runButton.addEventListener('click', runEventHandler);
     });
